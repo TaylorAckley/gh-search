@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppIdentifierComponent } from './app-identifier.component';
+import { SearchFieldComponent } from './search-field.component';
 
-describe('AppIdentifierComponent', () => {
-  let component: AppIdentifierComponent;
-  let fixture: ComponentFixture<AppIdentifierComponent>;
+describe('SearchFieldComponent', () => {
+  let component: SearchFieldComponent;
+  let fixture: ComponentFixture<SearchFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppIdentifierComponent ]
+      declarations: [ SearchFieldComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppIdentifierComponent);
+    fixture = TestBed.createComponent(SearchFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

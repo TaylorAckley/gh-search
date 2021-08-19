@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+$theme-colors: ("primary": #0081CF,
+  "secondary": #845EC2);
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+:root {
+  font-size: 18px;
+  --primary: #0081CF;
+  --secondary: #845EC2;
+  --phone: 811px;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+body {
+  background-color: #000;
+}
+
+.pointer,
+.clickable {
+  cursor: pointer;
+}
