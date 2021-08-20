@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 /** @todo refactor into its own extension/file */
 export function createTranslateLoader(http: HttpClient) {
@@ -29,6 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     NgbModule,
     /** 
      * Setup NGX Translate - if this was a more complicated app we might want to detect the users browser language or use api reflection with the accept header
@@ -40,7 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
           useFactory: (createTranslateLoader),
           deps: [HttpClient]
       }
-  })
+  }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

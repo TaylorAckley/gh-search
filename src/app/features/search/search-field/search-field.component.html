@@ -1,5 +1,8 @@
-<form class="form-inline row w-100 d-flex justify-content-center" id="search-form">
-    <input type="text" class="form-control form-control-lg col-9 mr-1" id="search-input" 
-        [attr.aria-placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate" [placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate">
+<form (ngSubmit)="onSubmit()" #f="ngForm"  class="form-inline row w-100 d-flex justify-content-center" id="search-form">
+    <input type="text" class="form-control form-control-lg col-9 mr-1" id="search-input"
+        [(ngModel)]="term" name="searchInput"
+        required
+        [attr.aria-placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate"
+        [placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate">
     <button class="btn btn-lg btn-primary col-2" type="submit" id="search-button">{{  'BUTTON_SEARCH' | translate }}</button>
 </form>
