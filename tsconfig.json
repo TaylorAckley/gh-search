@@ -19,7 +19,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@gh-search/services": ["src/app/core/services/*"],
+      "@gh-search/models": ["src/app/core/models/*"],
+      "@gh-search/environment": ["src/environments/environment.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,21 +1,14 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './features/layout/footer/footer.component';
-import { HeaderComponent } from './features/layout/header/header.component';
-import { ShellComponent } from './features/layout/shell/shell.component';
-import { ResultComponent } from './features/search/results-container/result/result.component';
-import { ResultsContainerComponent } from './features/search/results-container/results-container.component';
-import { SearchFieldComponent } from './features/search/search-field/search-field.component';
-import { SearchComponent } from './features/search/search.component';
-import { UserDetailComponent } from './features/search/user-detail/user-detail.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from './features/layout/layout.module';
+import { SearchModule } from './features/search/search.module';
 
 
 /** @todo refactor into its own extension/file */
@@ -25,20 +18,12 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    SearchComponent,
-    SearchFieldComponent,
-    ShellComponent,
-    ResultsContainerComponent,
-    ResultComponent,
-    UserDetailComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
+    LayoutModule,
+    SearchModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
