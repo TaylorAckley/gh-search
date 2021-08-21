@@ -1,8 +1,24 @@
-<form (ngSubmit)="onSubmit()" #f="ngForm"  class="form-inline row w-100 d-flex justify-content-center" id="search-form">
-    <input type="text" class="form-control form-control-lg col-9 mr-1" id="search-input"
-        [(ngModel)]="term" name="searchInput"
-        required
-        [attr.aria-placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate"
-        [placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate">
-    <button class="btn btn-lg btn-primary col-2" type="submit" id="search-button">{{  'BUTTON_SEARCH' | translate }}</button>
+<form (ngSubmit)="onSubmit()" #f="ngForm"
+    class="form-inline row w-100 d-flex justify-content-center align-content-middle" id="search-form">
+    <div class="form-group col-md-10">
+        <input type="search" class="form-control form-control-lg col-12" id="search-input" [(ngModel)]="term"
+            name="searchInput" #searchInput="ngModel" required
+            [attr.aria-placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate"
+            [placeholder]="'PLACEHOLDER_SEARCH_BAR' | translate"
+            [ngClass]="{ 'is-invalid': f.submitted && searchInput.invalid }">
+        <!-- An alternative would be a css class that styles .ng-invalid instead of ngClass-->
+        <div *ngIf="f.submitted && searchInput.invalid" class="invalid-feedback" role="alert">
+            <div *ngIf="searchInput.errors?.required">{{ 'TEXT_NO_TERM' | translate }}</div>
+        </div>
+        <div role="alert" class="text-light" *ngIf="noResults" id="no-results-alert">
+            {{ 'TEXT_NO_RESULTS' | translate }}
+        </div>
+        <div role="alert text-danger" *ngIf="errorMessage" id="error-alert">
+            <span class="sr-only">{{ 'LABEL_ERROR' | translate }}</span>
+            {{ errorMessage }}
+        </div>
+    </div>
+    <button class="btn btn-lg btn-primary col-2" type="submit" id="search-button" [disabled]="loading">
+        {{ 'BUTTON_SEARCH' | translate }}
+    </button>
 </form>

@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-$theme-colors: ("primary": #0081CF,
-  "secondary": #845EC2);
+$theme-colors: ("primary": #aaf0d1, "secondary": #845EC2);
 
 
 /* Importing Bootstrap SCSS file. */
@@ -9,7 +8,7 @@ $theme-colors: ("primary": #0081CF,
 
 :root {
   font-size: 18px;
-  --primary: #0081CF;
+  --primary: #aaf0d1;
   --secondary: #845EC2;
   --phone: 811px;
 }

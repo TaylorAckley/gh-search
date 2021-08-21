@@ -3,3 +3,14 @@
   display: flex;
   justify-content: center;
 }
+
+#search-button {
+  font-weight: bold;
+  border-width: 2px;
+
+  @media (max-width: 811px) {
+    width: 100%;
+    margin-left: .6em;
+    margin-right: .6em;
+  }
+}

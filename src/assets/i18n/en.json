@@ -1,5 +1,20 @@
 {
+    "BUTTON_CLEAR": "Clear",
     "BUTTON_SEARCH": "Search",
+    "BUTTON_SORT": "Sort",
+    "LABEL_ASC": "asc",
+    "LABEL_DEFAULT": "Default",
+    "LABEL_DESC": "desc",
+    "LABEL_ERROR": "The search operation encountered an error",
+    "LABEL_FOLLOWERS": "Followers",
+    "LABEL_FOLLOWING": "Following",
+    "LABEL_GISTS": "Gists",
+    "LABEL_NO_BIO": "No Bio Provided",
+    "LABEL_RESULT": "Result",
+    "LABEL_RESULTS": "Results",
+    "LABEL_REPOS": "Repos",
     "PLACEHOLDER_SEARCH_BAR": "Search Term",
+    "TEXT_NO_RESULTS": "Looks like your term returned no results - try a different term.",
+    "TEXT_NO_TERM": "Well this is awkward, you forgot a search term.",
     "TITLE_APP": "Github Search"
 }

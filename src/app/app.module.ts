@@ -13,6 +13,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ResultsContainerComponent } from './features/search/results-container/results-container.component';
+import { ResultComponent } from './features/search/results-container/result/result.component';
 
 /** @todo refactor into its own extension/file */
 export function createTranslateLoader(http: HttpClient) {
@@ -26,13 +28,14 @@ export function createTranslateLoader(http: HttpClient) {
     FooterComponent,
     SearchComponent,
     SearchFieldComponent,
-    ShellComponent
+    ShellComponent,
+    ResultsContainerComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    NgbModule,
     /** 
      * Setup NGX Translate - if this was a more complicated app we might want to detect the users browser language or use api reflection with the accept header
      * but we're only English, so we'll keep this simpler.

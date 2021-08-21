@@ -1,0 +1,47 @@
+<article class="card p-5 my-3" [id]="'result_' +result.id">
+    <div class="row">
+        <div class="col-1">
+            <img [src]="result.avatar_url" class="avatar border rounded">
+        </div>
+        <div class="col-10">
+            <a [href]="result.url">
+                <h5 class="card-title">
+                    {{result.login}}
+                </h5>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-10 offset-1">
+                <h5 *ngIf="result.name">{{ result.name }}</h5>
+                <span *ngIf="result.bio">{{ result.bio }}</span>
+                <span *ngIf="!result.bio">{{ 'LABEL_NO_BIO' | translate }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-10 offset-1">
+                <ul class="nav">
+                    <li>
+                        <strong class="text-secondary">{{ 'LABEL_FOLLOWERS' | translate }}</strong>
+                        {{ result.followers }}
+                    </li>
+                    <li>
+                        <strong class="text-secondary">{{ 'LABEL_FOLLOWING' | translate }}</strong>
+                        {{ result.following }}
+                    </li>
+                    <li>
+                        <strong class="text-secondary">{{ 'LABEL_GISTS' | translate }}</strong>
+                        {{ result.public_gists }}
+                    </li>
+                    <li>
+                        <strong class="text-secondary">{{ 'LABEL_REPOS' | translate }}</strong>
+                        {{ result.public_repos }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
