@@ -22,9 +22,9 @@ export class SearchComponent implements OnInit {
        /** If the page is loaded with a initial query param - execute a search on specified query param if
         *  ALLOW_INITIAL_SEARCH is set to to true, otherwise, wipe out the query param.
         */
-      if (params.term && Constants.ALLOW_INITIAL_SEARCH) {
+      if (params.term && !this.searchResults && Constants.ALLOW_INITIAL_SEARCH) {
         this.searchOnQuery(params.term);
-      } else {
+      } else if(!this.searchResults) {
         this.router.navigate(['.']);
       }
     });
