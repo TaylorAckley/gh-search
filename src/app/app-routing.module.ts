@@ -6,7 +6,8 @@ import { UserDetailComponent } from './features/search/user-detail/user-detail.c
 
 const routes: Routes = [
   { path: '', component: SearchComponent },
-  { path: 'users/:login', component: UserDetailComponent }
+    { path: 'users/:login', component: UserDetailComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
