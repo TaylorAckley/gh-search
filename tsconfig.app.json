@@ -4,11 +4,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "paths": {
-      "@gh-search/services": ["src/app/core/services/*"],
-      "@gh-search/models": ["src/app/core/models/*"],
-      "@gh-search/environment": ["src/environments/environment.ts"]
-    }
   },
   "files": [
     "src/main.ts",

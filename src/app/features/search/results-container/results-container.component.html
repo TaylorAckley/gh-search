@@ -4,8 +4,10 @@
             <h1 class="text-primary">
                 {{results.totalCount | number }}
                 <span [ngPlural]="results?.totalCount ?? 0">
-                    <ng-template ngPluralCase="=1">{{ 'LABEL_RESULT' | translate }}</ng-template>
-                    <ng-template ngPluralCase="other">{{ 'LABEL_RESULTS' | translate }}</ng-template>
+                    <ng-template ngPluralCase="=1">
+                        {{ 'LABEL_RESULT' | translate: { term: term } }}</ng-template>
+                    <ng-template ngPluralCase="other">
+                        {{ 'LABEL_RESULTS' | translate: { term: term } }}</ng-template>
                 </span>
             </h1>
             <h5 class="text-secondary">{{ 'LABEL_RESULT_COUNT' | translate: { pageSize: results.items.length } }}</h5>

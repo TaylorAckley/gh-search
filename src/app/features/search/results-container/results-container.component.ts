@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
@@ -12,11 +12,18 @@ import { GithubSearchMainService } from 'src/app/core/services/search/github-sea
   templateUrl: './results-container.component.html',
   styleUrls: ['./results-container.component.scss']
 })
-export class ResultsContainerComponent {
+export class ResultsContainerComponent implements OnInit {
   @Input() results!: SearchResults;
   @Output() clear = new EventEmitter();
   loading = false;
+  term!: string;
   constructor(private githubSearch: GithubSearchMainService, private router: Router, private toastr: ToastrService, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.term = params.term;
+    });
+  }
 
   /** Fetch a result page based on link href */
   paginate(link: Link) {
@@ -42,10 +49,8 @@ export class ResultsContainerComponent {
    */
   sort(value: any) {
     let [sort, direction] = value.split(',')
-    this.route.queryParams.subscribe(params => {
-      this.githubSearch.search(params.term, sort, direction)
+      this.githubSearch.search(this.term, sort, direction)
         .pipe(first())
         .subscribe(results => this.results = results, (err) => this.onError(err));
-    });
   }
 }
