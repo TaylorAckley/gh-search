@@ -1,0 +1,53 @@
+<div id="results-container">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="text-primary">
+                {{results.totalCount | number }}
+                <span [ngPlural]="results?.totalCount ?? 0">
+                    <ng-template ngPluralCase="=1">{{ 'LABEL_RESULT' | translate }}</ng-template>
+                    <ng-template ngPluralCase="other">{{ 'LABEL_RESULTS' | translate }}</ng-template>
+                </span>
+            </h1>
+            <h5 class="text-secondary">{{ 'LABEL_RESULT_COUNT' | translate: { pageSize: results.items.length } }}</h5>
+        </div>
+        <div class="col-6">
+            <nav class="nav w-100 justify-content-end align-items-center">
+                <li class="nav-item ml-2" *ngFor="let link of results.links">
+                    <button class="btn btn-outline-primary" [id]="'action_' + link.rel" (click)="paginate(link)"
+                        [disabled]="loading">
+                        {{ link.rel | titlecase }}
+                        <!-- Normal HATEOS links would have a label property-->
+                    </button>
+                </li>
+                <li class="nav-item ml-2">
+                    <button class="btn btn-outline-secondary" id="clear-search" (click)="clearResults()">
+                        &#10005; {{ 'BUTTON_CLEAR' | translate }}
+                    </button>
+                </li>
+            </nav>
+            <br>
+            <div>
+                <label class="sr-only" for="sort-dropdown">{{ 'BUTTON_SORT' | translate }}</label>
+                <select class="custom-select custom-select-lg" #sortDropdown name="sort-dropdown" id="sort-dropdown"
+                    (change)="sort(sortDropdown.value)">
+                    <option value="joined,asc" selected>
+                        {{ 'LABEL_JOINED' | translate }} {{ 'LABEL_ASC' | translate }}
+                        ({{ 'LABEL_DEFAULT' | translate }})
+                    </option>
+                    <option value="joined,desc">{{ 'LABEL_JOINED' | translate }} {{ 'LABEL_DESC' | translate }}
+                    </option>
+                    <option value="followers,asc">{{ 'LABEL_FOLLOWERS' | translate }} {{ 'LABEL_ASC' | translate }}
+                    </option>
+                    <option value="followers,desc">{{ 'LABEL_FOLLOWERS' | translate }} {{ 'LABEL_DESC' | translate
+                        }}
+                    </option>
+                    <option value="repositories,asc">{{ 'LABEL_REPOS' | translate }} {{ 'LABEL_ASC' | translate }}
+                    </option>
+                    <option value="repositories,desc">{{ 'LABEL_REPOS' | translate }} {{ 'LABEL_DESC' | translate }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <app-result [result]="result" *ngFor="let result of results.items"></app-result>
+</div>

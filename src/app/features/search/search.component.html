@@ -1,0 +1,9 @@
+<app-results-container (clear)="clearResults()" class="w-100" [results]="searchResults"
+    *ngIf="searchResults; else searchHero">
+</app-results-container>
+
+<ng-template #searchHero>
+    <div id="search-hero" class="jumbotron">
+        <app-search-field (results)="onResults($event)"></app-search-field>
+    </div>
+</ng-template>

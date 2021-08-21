@@ -1,0 +1,47 @@
+<div *ngIf="errorMessage" id="error-alert" role="alert">
+    <p class="text-danger">{{ errorMessage }}</p>
+</div>
+<button class="btn btn-secondary mb-3" (click)="back()"> {{ 'BUTTON_BACK' | translate }} </button>
+<div class="row text-light" *ngIf="$githubUser | async as githubUser; else loading">
+    <div class="col-2">
+        <img class="img-response img-thumbnail border rounded" [src]="githubUser.avatar_url">
+    </div>
+    <div class="col-10">
+        <h1>{{ githubUser.login }}</h1>
+        <p>{{ githubUser.bio ?? 'LABEL_NO_BIO' | translate }}</p>
+        <ul class="nav">
+            <li>
+                <strong class="text-secondary">{{ 'LABEL_FOLLOWERS' | translate }}</strong>
+                {{ githubUser.followers }}
+            </li>
+            <li>
+                <strong class="text-secondary">{{ 'LABEL_FOLLOWING' | translate }}</strong>
+                {{ githubUser.following }}
+            </li>
+            <li>
+                <strong class="text-secondary">{{ 'LABEL_GISTS' | translate }}</strong>
+                {{ githubUser.public_gists }}
+            </li>
+            <li>
+                <strong class="text-secondary">{{ 'LABEL_REPOS' | translate }}</strong>
+                {{ githubUser.public_repos }}
+            </li>
+        </ul>
+        <ul class="nav mt-3">
+            <li class="nav-items">
+                <a class="btn btn-primary" [href]="githubUser.html_url">
+                    {{ 'LABEL_VIEW_GITHUB' | translate }}
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-primary" [href]="githubUser.url">
+                    {{ 'LABEL_VIEW_API' | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<ng-template #loading>
+    <span class="sr-only">{{ 'TEXT_LOADING' | translate }}</span>
+    {{ 'TEXT_LOADING' | translate }}
+</ng-template>
