@@ -1,4 +1,5 @@
 {
+    "BUTTON_BACK": "Back",
     "BUTTON_CLEAR": "Clear",
     "BUTTON_SEARCH": "Search",
     "BUTTON_SORT": "Sort",
@@ -9,12 +10,19 @@
     "LABEL_FOLLOWERS": "Followers",
     "LABEL_FOLLOWING": "Following",
     "LABEL_GISTS": "Gists",
+    "LABEL_JOINED": "Joined",
     "LABEL_NO_BIO": "No Bio Provided",
     "LABEL_RESULT": "Result",
+    "LABEL_RESULT_COUNT": "Showing {{pageSize}} per page",
     "LABEL_RESULTS": "Results",
     "LABEL_REPOS": "Repos",
+    "LABEL_VIEW_DETAILS": "View Details",
+    "LABEL_VIEW_GITHUB": "View on Github",
+    "LABEL_VIEW_API": "View on API Record",
     "PLACEHOLDER_SEARCH_BAR": "Search Term",
+    "TEXT_LOADING": "Loading",
     "TEXT_NO_RESULTS": "Looks like your term returned no results - try a different term.",
     "TEXT_NO_TERM": "Well this is awkward, you forgot a search term.",
+    "TEXT_NO_USER": "We were unable to find the user record",
     "TITLE_APP": "Github Search"
 }

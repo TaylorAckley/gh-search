@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Link, LinkRel } from '../../models/misc/link.model';
-import { GitHubSearchResponse } from '../../models/search/github/github-search-response.model';
-import { GitHubUser } from '../../models/search/github/github-user.model';
+import { GitHubSearchResponse, LeanGitHubUser } from '../../models/search/github/github-search-response.model';
+import { GitHubUser, GitHubUserCustom } from '../../models/search/github/github-user.model';
 import { SearchResults } from '../../models/search/search-results.model';
 import { BaseGithubSearch } from './base-github-search.service';
 
@@ -17,8 +17,10 @@ export class GithubSearchMainService extends BaseGithubSearch {
     super(http)
   }
 
-  search(term: string) {
-    return this.fetchWithFullResponse<GitHubSearchResponse>(this.withSearchUri(term, 0, 0))
+  /** Public Methods */
+
+  search(term: string, sort?: string, direction?: string) {
+    return this.fetchWithFullResponse<GitHubSearchResponse>(this.withSearchUri(term, sort, direction))
       .pipe(
         switchMap(response =>
           this.transformResponse(response)
@@ -35,6 +37,12 @@ export class GithubSearchMainService extends BaseGithubSearch {
       );
   }
 
+  fetchUserRecord(login: string) {
+    return this.fetch<GitHubUser>(this.withUserUri(login));
+  }
+
+  /** Private Methods */
+
   /**  Transform the raw github response into something we can use
    *   We map over the array of users and fetch their full record,
    *   and use forkJoin to convert them from observables to objects
@@ -46,11 +54,22 @@ export class GithubSearchMainService extends BaseGithubSearch {
     return forkJoin(
       {
         totalCount: of(body.total_count),
-        items: body.items.length ? forkJoin(body.items.map(leanUser => this.fetch<GitHubUser>(leanUser.url))) : of([]),
+        items: body.items.length ? forkJoin(body.items.map(leanUser => this.transformUser(leanUser))) : of([]),
         links: of(links)
       }
     )
-  } 
+  }
+
+  /** Grab the full user record */
+  private transformUser(leanUser: LeanGitHubUser) {
+    return this.fetch<GitHubUser>(leanUser.url).pipe(map(githubUser => this.addUserLinks(githubUser)));
+  }
+
+  /** Add a Link to the user for easy navigation to their page */
+  private addUserLinks(githubUser: GitHubUser): GitHubUserCustom {
+    (githubUser as GitHubUserCustom).links = [new Link(LinkRel.page, `users/${githubUser.login}`)];
+    return githubUser as GitHubUserCustom;
+  }
 
   /** The Github API returnbs a Link header containing pagination links
    *  We can use some string parsing to build a list of links we can use to navigate
@@ -70,6 +89,5 @@ export class GithubSearchMainService extends BaseGithubSearch {
     }
     return links;
   }
-  
 
 }

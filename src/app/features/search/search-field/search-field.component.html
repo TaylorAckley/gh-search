@@ -13,7 +13,7 @@
         <div role="alert" class="text-light" *ngIf="noResults" id="no-results-alert">
             {{ 'TEXT_NO_RESULTS' | translate }}
         </div>
-        <div role="alert text-danger" *ngIf="errorMessage" id="error-alert">
+        <div role="alert text-danger text-light" *ngIf="errorMessage" id="error-alert">
             <span class="sr-only">{{ 'LABEL_ERROR' | translate }}</span>
             {{ errorMessage }}
         </div>

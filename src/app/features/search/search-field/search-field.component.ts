@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SearchResults } from 'src/app/core/models/search/search-results.model';
 import { GithubSearchMainService } from 'src/app/core/services/search/github-search-main.service';
 
@@ -9,7 +10,7 @@ import { GithubSearchMainService } from 'src/app/core/services/search/github-sea
   templateUrl: './search-field.component.html',
   styleUrls: ['./search-field.component.scss']
 })
-export class SearchFieldComponent implements OnInit {
+export class SearchFieldComponent {
 
 
   /** 
@@ -23,12 +24,9 @@ export class SearchFieldComponent implements OnInit {
   errorMessage!: string;
   noResults = false;
   loading = false;
-  constructor(private githubSearch: GithubSearchMainService) { }
+  constructor(private githubSearch: GithubSearchMainService, private router: Router) { }
 
   @ViewChild('f') f!: NgForm;
-
-  ngOnInit(): void {
-  }
 
   onSubmit() {
     if (!this.term) return;
@@ -42,7 +40,8 @@ export class SearchFieldComponent implements OnInit {
     this.loading = false;
     this.noResults = false;
     if (results.totalCount ?? 0 > 0) {
-      this.results.emit(results); 
+      this.results.emit(results);
+      this.router.navigate(['.'], { queryParams: { term: this.term } });
     } else {
       this.f.resetForm();
       this.noResults = true;
@@ -51,7 +50,7 @@ export class SearchFieldComponent implements OnInit {
 
   onError(err: HttpErrorResponse) {
     this.loading = false;
-    this.errorMessage = err.message;
+    this.errorMessage = err.error.message;
   }
 
 }

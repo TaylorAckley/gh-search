@@ -7,16 +7,18 @@
             <a [href]="result.url">
                 <h5 class="card-title">
                     {{result.login}}
+                    <span *ngIf="result.name">({{ result.name }})</span>
                 </h5>
             </a>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body d-none">
         <div class="row">
             <div class="col-10 offset-1">
-                <h5 *ngIf="result.name">{{ result.name }}</h5>
+
                 <span *ngIf="result.bio">{{ result.bio }}</span>
                 <span *ngIf="!result.bio">{{ 'LABEL_NO_BIO' | translate }}</span>
+
             </div>
         </div>
     </div>
@@ -41,6 +43,9 @@
                         {{ result.public_repos }}
                     </li>
                 </ul>
+                <button class="card-link btn btn-primary mt-3" (click)="gotoResultDetails(result)">
+                    {{ 'LABEL_VIEW_DETAILS' | translate }}
+                </button>
             </div>
         </div>
     </div>

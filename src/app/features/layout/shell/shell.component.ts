@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-shell',
@@ -6,11 +6,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./shell.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ShellComponent implements OnInit {
+export class ShellComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

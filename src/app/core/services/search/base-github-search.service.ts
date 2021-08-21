@@ -2,7 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Constants } from "../../constants/constants";
 
-/** Describes the basic shape and features of a Github Search Service */
+/** Abstract classes are handy if you need multiple implementations of a service,
+ *  for instance, we could adapt this for GraphQL, or to fetch data from a mock data service
+ *  instead
+ */
+
+
+/** Describes the basic shape and features of a Github Search Service
+ * @see https://docs.github.com/en/rest/reference/search#search-users
+ */
 export abstract class BaseGithubSearch {
 
     /** constant for the root Github Search API URI
@@ -10,6 +18,7 @@ export abstract class BaseGithubSearch {
      * Or you could create a constants.ts if you prefer magic strings in a single file.
      */
     protected searchUriBase = 'https://api.github.com/search/users';
+    protected userUriBase = 'https://api.github.com/users';
     constructor(protected http: HttpClient) { }
     /** 
     * Query the public Github User Search API with the given term.
@@ -29,13 +38,18 @@ export abstract class BaseGithubSearch {
     /**
      * 
      * @param term The search term to be encoded and included in the uri
-     * @param since The last userid - results returned will have a higher id than this numb er
-     * @param page  The page to fetch
+     * @param sort The sort key, either followers, repositories or joined
+     * @param direction  The direction to sort - either asc or desc
      * @returns 
      */
-    protected withSearchUri(term: string, since?: number, page?: number) {
+    protected withSearchUri(term: string, sort?: string, direction?: string) {
         let endpoint = `${this.searchUriBase}?q=${encodeURIComponent(term)}&per_page=${Constants.PAGE_SIZE}`
-        if (since && page) endpoint += `&since=${since}&page=${page}`;
+        if (sort) endpoint += `&sort=${sort}&order=${direction ?? 'desc'}`;
+        return endpoint;
+    }
+
+    protected withUserUri(login: string) {
+        let endpoint = `${this.userUriBase}/${login}`
         return endpoint;
     }
     

@@ -5,6 +5,7 @@ $theme-colors: ("primary": #aaf0d1, "secondary": #845EC2);
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '~ngx-toastr/toastr';
 
 :root {
   font-size: 18px;

@@ -5,6 +5,7 @@
  */
 
 export class Constants {
+    static ALLOW_INITIAL_SEARCH = false;
     /** Default Page Size when searching GitHub */
     static PAGE_SIZE = 3;
 }

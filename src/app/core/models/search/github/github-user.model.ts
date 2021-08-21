@@ -1,3 +1,5 @@
+import { Link } from "../../misc/link.model";
+
 export interface GitHubUser {
     login:               string;
     id:                  number;
@@ -31,4 +33,8 @@ export interface GitHubUser {
     following:           number;
     created_at:          Date;
     updated_at:          Date;
+}
+
+export interface GitHubUserCustom extends GitHubUser {
+    links: Link[];
 }
